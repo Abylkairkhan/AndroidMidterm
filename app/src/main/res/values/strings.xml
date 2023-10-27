@@ -3,4 +3,9 @@
     <string name="route_fmt">%1$s — %2$s</string>
     <string name="time_fmt">%1$s час %2$s мин</string>
     <string name="direct">прямой</string>
+    <string name="sort">Сортировка</string>
+    <string name="sort_cheapest">Самый дешевый</string>
+    <string name="sort_fastest">Самый быстрый</string>
+    <string name="sort_departure_earliest">Вылет рано</string>
+    <string name="sort_departure_latest">Вылет поздно</string>
 </resources>

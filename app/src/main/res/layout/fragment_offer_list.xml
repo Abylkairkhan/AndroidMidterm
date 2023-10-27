@@ -14,4 +14,14 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/color_text_secondary"
+        app:elevation="0dp"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_sort" />
+
 </FrameLayout>

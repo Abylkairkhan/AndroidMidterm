@@ -1,10 +1,10 @@
 package com.example.avia.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.avia.adapter.OfferListAdapter
 import com.example.avia.databinding.FragmentOfferListBinding
 import com.example.avia.model.service.FakeService
@@ -40,6 +40,13 @@ class OfferListFragment : Fragment() {
     }
 
     private fun setupUI() {
-        binding.offerList.adapter = adapter
+        with(binding) {
+            offerList.adapter = adapter
+            sort.setOnClickListener {
+                SortBottomSheetFragment.newInstance().also {
+                    it.show(childFragmentManager, it.javaClass.toString())
+                }
+            }
+        }
     }
 }
