@@ -28,6 +28,8 @@ ApiClient - a Retrofit based http client. Use it for your network response.
 3. Add a functionality to sort offer list by **price, duration, departure time.** 
 Hint: SortBottomSheetFragment.
 
+Bonus Task: add images of airlines using Glide. There is already an ImageView for you.
+
 ## Submission
 
 Create a pull request with your changes targeting branch **main**. 
