@@ -23,8 +23,8 @@ ApiClient - a Retrofit based http client. Use it for your network response.
 
 ## Tasks
 
-1. Offer list is displayed using Recycler View, but it uses not optimized method `notifyDataSetChanged()`. Add Diff.Util implementation for the recycler view
-2. Offer list is taken from `FakeService` object, which is actually a list of hardcoded `Offer` objects. Add a GET request using Retrofit to fetch offer list from [here](https://my-json-server.typicode.com/estharossa/android-avia-db/db)
+1. Offer list is taken from `FakeService` object, which is actually a list of hardcoded `Offer` objects. Add a GET request using Retrofit to fetch offer list from [here](https://my-json-server.typicode.com/estharossa/android-avia-db/db).
+2. Offer list is displayed using Recycler View, but it uses not optimized method `notifyDataSetChanged()`. Add Diff.Util implementation for the recycler view
 3. Add a functionality to sort offer list by **price, duration, departure time.** 
 Hint: SortBottomSheetFragment.
 
