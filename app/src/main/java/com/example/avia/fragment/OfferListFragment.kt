@@ -1,13 +1,14 @@
 package com.example.avia.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.avia.adapter.OfferListAdapter
 import com.example.avia.databinding.FragmentOfferListBinding
-import com.example.avia.model.service.FakeService
 
 
 class OfferListFragment : Fragment() {
@@ -24,6 +25,8 @@ class OfferListFragment : Fragment() {
         OfferListAdapter()
     }
 
+    private val viewModel: OfferListViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,14 +39,19 @@ class OfferListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupUI()
-        adapter.setItems(FakeService.offerList)
+        viewModel.fetchFlights()
+
+        viewModel.flightList.observe(viewLifecycleOwner) {
+            adapter.setItems(viewModel.flightList.value!!.offerList)
+            binding.progressBar.visibility = View.INVISIBLE
+        }
     }
 
     private fun setupUI() {
         with(binding) {
             offerList.adapter = adapter
             sort.setOnClickListener {
-                SortBottomSheetFragment.newInstance().also {
+                SortBottomSheetFragment.newInstance(viewModel).also {
                     it.show(childFragmentManager, it.javaClass.toString())
                 }
             }

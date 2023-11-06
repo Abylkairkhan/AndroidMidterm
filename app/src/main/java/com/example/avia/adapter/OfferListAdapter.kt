@@ -1,8 +1,11 @@
 package com.example.avia.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.avia.R
 import com.example.avia.databinding.ItemOfferBinding
 import com.example.avia.databinding.LayoutFlightBinding
@@ -10,12 +13,17 @@ import com.example.avia.model.entity.Offer
 
 class OfferListAdapter : RecyclerView.Adapter<OfferListAdapter.ViewHolder>() {
 
-    private val items: ArrayList<Offer> = arrayListOf()
+    private var items: List<Offer> = arrayListOf()
+
+    fun getItems(): List<Offer> {
+        return items
+    }
 
     fun setItems(offerList: List<Offer>) {
-        items.clear()
-        items.addAll(offerList)
-        notifyDataSetChanged()
+        val diffUtil = MyDiffUtil(getItems(), offerList)
+        val result = DiffUtil.calculateDiff(diffUtil)
+        items = offerList
+        result.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -43,14 +51,15 @@ class OfferListAdapter : RecyclerView.Adapter<OfferListAdapter.ViewHolder>() {
         fun bind(offer: Offer) {
             offer.flights.forEach {
                 binding.flightsLayout.addView(
-                    createFlightView(it, binding.root)
+                    createFlightView(it, binding.root, offer.price)
                 )
             }
         }
 
         private fun createFlightView(
             flight: Offer.Flight,
-            parent: ViewGroup
+            parent: ViewGroup,
+            price: Int
         ) = LayoutFlightBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         ).apply {
@@ -67,6 +76,8 @@ class OfferListAdapter : RecyclerView.Adapter<OfferListAdapter.ViewHolder>() {
                 getTimeFormat(flight.duration).second.toString()
             )
             direct.text = parent.context.getString(R.string.direct)
+            priceTextView.text = price.toString() + "₸"
+            imgView.load("https://caspiannews.com/media/caspian_news/all_original_photos/1562246491_618507_1562246410_465146547_wide.jpg")
         }.root
 
         private fun getTimeFormat(minutes: Int): Pair<Int, Int> = Pair(

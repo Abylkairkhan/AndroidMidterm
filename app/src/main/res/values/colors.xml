@@ -10,4 +10,6 @@
 
     <color name="color_text_main">#202123</color>
     <color name="color_text_secondary">#83878F</color>
+    <color name="color_text_price">#228B22</color>
+
 </resources>
